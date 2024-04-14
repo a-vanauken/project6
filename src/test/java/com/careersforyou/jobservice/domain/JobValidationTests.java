@@ -23,19 +23,16 @@ class JobValidationTests {
 
     @Test   // Run a test
     void whenAllFieldsCorrectThenValidationSucceeds() {
-        var job = new Job("", "", "", "", "", "");
+        var job = new Job("12345", "Developer", "Java Spring Boot Developer", "ACC", "Java", "Spring Boot");
         Set<ConstraintViolation<Job>> violations = validator.validate(job);
         assertThat(violations).isEmpty();
     }
 
     @Test   // Run a test
-    void whenIsbnDefinedButIncorrectThenValidationsFails() {
-        var job = new Job("", "", "", "", "", "");
+    void whenJobIdIsDefinedButIncorrectThenValidationsFails() {
+        var job = new Job("12345", "Developer", "Java Spring Boot Developer", "ACC", "Java", "Spring Boot");
         Set<ConstraintViolation<Job>> violations = validator.validate(job);
         assertThat(violations).hasSize(1);
         assertThat(violations.iterator().next().getMessage()).isEqualTo("The job format must be valid");
-
     }
-
-
 }
